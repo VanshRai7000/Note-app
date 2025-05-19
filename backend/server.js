@@ -29,6 +29,18 @@ app.post('/notes', (req, res) => {
   });
 });
 
+app.delete('/notes/:id', (req, res) => {
+    const id = req.params.id;
+    db.query('DELETE FROM notes WHERE id = ?', [id], (err, result) => {
+        if (err) {
+            console.error('Error deleting note:', err);
+            res.status(500).json({ error: 'Error deleting note' });
+            return;
+        }
+        res.json({ message: 'Note deleted successfully' });
+    });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
