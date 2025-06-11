@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, '../frontend')));
 // Get all notes
-app.get('/notes', (req, res) => {
+app.get('/notes', (req, res) => { 
   db.query('SELECT * FROM notes', (err, results) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json(results);
